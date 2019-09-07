@@ -17,12 +17,13 @@ chrome.runtime.onInstalled.addListener(function() {
         : "from the extension"
     );
 
-    if (request.cmd == "add") {
-      chrome.runtime.sendMessage({ cmd: "new", data: request.data }, function(
-        response
-      ) {
-        console.log(response);
-      });
+    if (request.message == "background") {
+      chrome.runtime.sendMessage(
+        { message: "popup", cmd: request.cmd, data: request.data },
+        function(response) {
+          console.log(response);
+        }
+      );
       sendResponse({ farewell: "goodbye" });
     }
   });
