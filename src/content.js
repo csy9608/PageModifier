@@ -47,8 +47,8 @@ function addOptionBox(e) {
   e.appendChild(container);
 }
 
-function bindEvents(el) {
-  el.addEventListener("mouseup", element => {
+function bindEvents(e) {
+  e.addEventListener("mouseup", element => {
     highlight();
   });
 }
