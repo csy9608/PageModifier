@@ -15,7 +15,6 @@ const highlight = () => {
 }
 
 const setHighlightColor = (color) => {
-  console.log(color);
   highlightColor = color;
 }
 
