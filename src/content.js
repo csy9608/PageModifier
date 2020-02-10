@@ -1,4 +1,4 @@
-var defaultColor = "#ffff00";  // yellow
+var defaultColor = "#ffff00"; // yellow
 var highlightColor = defaultColor;
 
 const highlight = () => {
@@ -12,25 +12,49 @@ const highlight = () => {
     span.appendChild(range.extractContents());
     range.insertNode(span);
   }
-}
+};
 
-const setHighlightColor = (color) => {
+const setHighlightColor = color => {
   highlightColor = color;
-}
+};
 
 function addColorPicker(e) {
-  var container = document.createElement("div");
-  var label = document.createElement("label");
   var colorPicker = document.createElement("input");
 
-  label.innerText = "Color";
   colorPicker.type = "color";
   colorPicker.value = defaultColor;
-  colorPicker.onchange = (e) => setHighlightColor(e.target.value);
+  colorPicker.style.width = "30px";
+  colorPicker.onchange = e => setHighlightColor(e.target.value);
 
-  container.appendChild(label);
-  container.appendChild(colorPicker);
-  e.appendChild(container);
+  e.appendChild(colorPicker);
+}
+
+function addTextOptions(e) {
+  var boldEffect = document.createElement("div");
+  var italicEffect = document.createElement("div");
+  var highlightEffect = document.createElement("img");
+  var underlineEffect = document.createElement("div");
+
+  boldEffect.innerText = "B";
+  boldEffect.style.fontWeight = "bold";
+  boldEffect.style.fontSize = "15px";
+
+  italicEffect.innerText = "I";
+  italicEffect.style.fontStyle = "italic";
+  italicEffect.style.fontSize = "15px";
+
+  highlightEffect.src = chrome.runtime.getURL("images/marker32.png");
+  highlightEffect.style.width = "18px";
+  highlightEffect.style.height = "18px";
+
+  underlineEffect.innerText = "U";
+  underlineEffect.style.fontSize = "15px";
+  underlineEffect.style.textDecoration = "underline";
+
+  e.appendChild(boldEffect);
+  e.appendChild(italicEffect);
+  e.appendChild(underlineEffect);
+  e.appendChild(highlightEffect);
 }
 
 function addOptionBox(e) {
@@ -41,9 +65,14 @@ function addOptionBox(e) {
   container.style.right = "10px";
   container.style.border = "solid 1px black";
   container.style.backgroundColor = "white";
-  container.style.padding = "10px";
+  container.style.paddingTop = "5px";
+  container.style.paddingBottom = "5px";
+  container.style.display = "flex";
+  container.style.justifyContent = "space-evenly";
+  container.style.width = "150px";
 
-  addColorPicker(container)
+  addTextOptions(container);
+  addColorPicker(container);
   e.appendChild(container);
 }
 
