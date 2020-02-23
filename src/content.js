@@ -1,14 +1,25 @@
+const DEFAULT = "option";
+const CLICKED = "clicked";
+const NON_CLICKED = "non-clicked";
+
 var defaultColor = "#ffff00"; // yellow
 var highlightColor = defaultColor;
+var mode = null;
 
-const highlight = () => {
+const addEffect = () => {
+  if (mode == null) {
+    return;
+  }
   var selection = window.getSelection();
-
   if (selection.toString().length > 0) {
     var span = document.createElement("span");
     var range = selection.getRangeAt(0);
 
-    span.style.backgroundColor = highlightColor;
+    if (mode == "highlight") {
+      span.style.backgroundColor = highlightColor;
+    } else {
+      span.className += " " + mode;
+    }
     span.appendChild(range.extractContents());
     range.insertNode(span);
   }
@@ -23,53 +34,67 @@ function addColorPicker(e) {
 
   colorPicker.type = "color";
   colorPicker.value = defaultColor;
-  colorPicker.style.width = "30px";
+  colorPicker.className = DEFAULT;
   colorPicker.onchange = e => setHighlightColor(e.target.value);
 
   e.appendChild(colorPicker);
 }
 
 function addTextOptions(e) {
-  var boldEffect = document.createElement("div");
-  var italicEffect = document.createElement("div");
-  var highlightEffect = document.createElement("img");
-  var underlineEffect = document.createElement("div");
+  function newOption(tag, properties) {
+    var element = document.createElement(tag);
+    Object.entries(properties).forEach(p => {
+      element.setAttribute(p[0], p[1]);
+    });
+    element.className += " " + DEFAULT + " " + NON_CLICKED;
+    element.onclick = onClickHandler;
 
-  boldEffect.innerText = "B";
-  boldEffect.style.fontWeight = "bold";
-  boldEffect.style.fontSize = "15px";
+    e.appendChild(element);
+    options.push(element);
+    return element;
+  }
 
-  italicEffect.innerText = "I";
-  italicEffect.style.fontStyle = "italic";
-  italicEffect.style.fontSize = "15px";
+  function replaceClass(elem, org_str, new_str) {
+    elem.className = elem.className
+      .split(" ")
+      .map(c => (c == org_str ? new_str : c))
+      .join(" ");
+  }
 
-  highlightEffect.src = chrome.runtime.getURL("images/marker32.png");
-  highlightEffect.style.width = "18px";
-  highlightEffect.style.height = "18px";
+  function clearBackgroundColor() {
+    options.forEach(o => {
+      replaceClass(o, CLICKED, NON_CLICKED);
+    });
+  }
 
-  underlineEffect.innerText = "U";
-  underlineEffect.style.fontSize = "15px";
-  underlineEffect.style.textDecoration = "underline";
+  function onClickHandler(elem) {
+    clearBackgroundColor();
+    mode = elem.target.getAttribute("mode");
+    replaceClass(elem.target, NON_CLICKED, CLICKED);
+  }
 
-  e.appendChild(boldEffect);
-  e.appendChild(italicEffect);
-  e.appendChild(underlineEffect);
-  e.appendChild(highlightEffect);
+  var options = [];
+  newOption("div", {
+    class: "bold",
+    mode: "bold"
+  }).innerText = "B";
+  newOption("div", {
+    class: "italic",
+    mode: "italic"
+  }).innerText = "I";
+  newOption("img", {
+    src: chrome.runtime.getURL("images/marker32.png"),
+    mode: "highlight"
+  });
+  newOption("div", {
+    class: "underline",
+    mode: "underline"
+  }).innerText = "U";
 }
 
 function addOptionBox(e) {
   var container = document.createElement("div");
   container.id = "option_box";
-  container.style.position = "fixed";
-  container.style.bottom = "20px";
-  container.style.right = "10px";
-  container.style.border = "solid 1px black";
-  container.style.backgroundColor = "white";
-  container.style.paddingTop = "5px";
-  container.style.paddingBottom = "5px";
-  container.style.display = "flex";
-  container.style.justifyContent = "space-evenly";
-  container.style.width = "150px";
 
   addTextOptions(container);
   addColorPicker(container);
@@ -77,9 +102,7 @@ function addOptionBox(e) {
 }
 
 function bindEvents(e) {
-  e.addEventListener("mouseup", element => {
-    highlight();
-  });
+  e.addEventListener("mouseup", addEffect);
 }
 
 bindEvents(document);

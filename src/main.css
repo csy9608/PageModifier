@@ -1,0 +1,39 @@
+.option {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+}
+
+#option_box {
+  position: fixed;
+  bottom: 20px;
+  right: 10px;
+  border: solid 1px black;
+  background-color: white;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  display: flex;
+  justify-content: space-evenly;
+  width: 150px;
+}
+
+.clicked {
+  background-color: lightgrey;
+}
+
+.non-clicked {
+  background-color: white;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.underline {
+  text-decoration: underline;
+}
