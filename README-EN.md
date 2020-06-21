@@ -4,11 +4,11 @@ Select part of page you want and save to document !
 
 1. Demo video
 
-   - master branch
+   - master branch</br>
      [![Video Label](http://img.youtube.com/vi/8zty4U6jumA/0.jpg)](https://www.youtube.com/watch?v=8zty4U6jumA)
 
-   - renewal branch  
-     [![Video Label](/docs/renewal-demo.mp4)](/docs/renewal-demo.mp4)
+   - renewal branch</br>
+     [![Video Label](http://img.youtube.com/vi/6CElqfeamIg/0.jpg)](https://www.youtube.com/watch?v=6CElqfeamIg)
 
 2. Install
 
