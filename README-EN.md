@@ -5,15 +5,10 @@ Select part of page you want and save to document !
 1. Demo video
 
    - master branch</br>
-     <video>
-
-        <source src="https://www.youtube.com/watch?v=8zty4U6jumA"/>
-     </video>
+     [![Video Label](http://img.youtube.com/vi/8zty4U6jumA/0.jpg)](https://www.youtube.com/watch?v=8zty4U6jumA)
 
    - renewal branch</br>
-     <video>
-        <source src="https://www.youtube.com/watch?v=6CElqfeamIg"/>
-     </video>
+     [![Video Label](http://img.youtube.com/vi/6CElqfeamIg/0.jpg)](https://www.youtube.com/watch?v=6CElqfeamIg)
 
 2. Install
 
