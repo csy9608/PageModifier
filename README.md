@@ -7,10 +7,10 @@
 1. 데모 영상
 
    - master branch
-     [![Video Label](http://img.youtube.com/vi/8zty4U6jumA/0.jpg)](https://www.youtube.com/watch?v=8zty4U6jumA)
+     ![](http://img.youtube.com/vi/8zty4U6jumA/0.jpg)
 
    - renewal branch  
-     [![Video Label](/docs/renewal-demo.mp4)](/docs/renewal-demo.mp4)
+     ![](/docs/renewal-demo.mp4)
 
 2. 설치 방법
 
